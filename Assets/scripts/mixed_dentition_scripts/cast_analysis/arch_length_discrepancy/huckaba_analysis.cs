@@ -247,5 +247,49 @@ int get_index(float[] arr, float ele, int len)
 		bhopalFemaleMan.text = (12.452 + 0.349*Sum_of_four_Mnd_Incisors).ToString();
 	}
 
+	public TMP_InputField bucco_max_left,bucco_max_right;
+	public TMP_Text maxWidthLeft,maxWidthRight,manWidthLeft,manWidthRight;
+
+	public void calculateFoudaAnalysis()
+	{
+		maxWidthLeft.text = (ftpr(bucco_max_left)*2 - 1).ToString();
+		maxWidthRight.text = (ftpr(bucco_max_right)*2 - 1).ToString();
+		manWidthLeft.text = (ftpr(bucco_max_left)*2).ToString();
+		manWidthRight.text = (ftpr(bucco_max_right)*2).ToString();
+	}
+
+	public TMP_InputField MaxFirstPermMol_left,MandFirstPermMol_left,MaxFirstPermMol_right,MandFirstPermMol_right;
+	private float sum_mesiodistal_lateral_inc_and_first_perm_molar_left_mand,sum_mesiodistal_lateral_inc_and_first_perm_molar_left_max,sum_mesiodistal_lateral_inc_and_first_perm_molar_right_max,sum_mesiodistal_lateral_inc_and_first_perm_molar_right_mand;
+
+	public TMP_Text trankmaxMalesleft,trankmaxMalesRight,trankManMalesleft,trankManMalesRight,trankmaxFeMalesleft,trankmaxFeMalesRight,trankManFeMalesleft,trankManFeMalesRight;
+	public void calculateTrankmannAnalysis()
+	{
+		//0->left, 1->right
+		//0->max, 1->mand
+		sum_mesiodistal_lateral_inc_and_first_perm_molar_left_max = ftpr(MaxFirstPermMol_left) + ftpr(MxLIL);
+		sum_mesiodistal_lateral_inc_and_first_perm_molar_left_mand = ftpr(MandFirstPermMol_left) + ftpr(MndLIL);
+
+		sum_mesiodistal_lateral_inc_and_first_perm_molar_right_max = ftpr(MaxFirstPermMol_right) + ftpr(MxLIR);
+		sum_mesiodistal_lateral_inc_and_first_perm_molar_right_mand = ftpr(MandFirstPermMol_right) + ftpr(MndLIR);
+
+		trankmaxMalesleft.text = (0.93*sum_mesiodistal_lateral_inc_and_first_perm_molar_left_max + 5.5).ToString();
+		trankmaxMalesRight.text = (0.93*sum_mesiodistal_lateral_inc_and_first_perm_molar_right_max + 5.5).ToString();
+		trankManMalesleft.text = (0.94*sum_mesiodistal_lateral_inc_and_first_perm_molar_left_mand + 5.06).ToString();
+		trankManMalesRight.text = (0.94*sum_mesiodistal_lateral_inc_and_first_perm_molar_right_mand + 5.06).ToString();
+		trankmaxFeMalesleft.text = (0.99*sum_mesiodistal_lateral_inc_and_first_perm_molar_left_max + 4.47).ToString();
+		trankmaxFeMalesRight.text = (0.99*sum_mesiodistal_lateral_inc_and_first_perm_molar_right_max + 4.47).ToString();
+		trankManFeMalesleft.text = (0.96*sum_mesiodistal_lateral_inc_and_first_perm_molar_left_mand + 4.43).ToString();
+		trankManFeMalesRight.text = (0.96*sum_mesiodistal_lateral_inc_and_first_perm_molar_right_mand + 4.43).ToString();
+		
+	}
+	public TMP_InputField MaxFirstPermMol_left_bachmann;
+	public TMP_Text maxillaryWidthBachhmann,mandibularWidthBachmann;
+	public void calculateBachmann()
+	{
+		maxillaryWidthBachhmann.text = (0.81*ftpr(MxLIL) + 0.54*ftpr(MaxFirstPermMol_left_bachmann) + 0.56*ftpr(MndLIL) + 6.98).ToString();
+		mandibularWidthBachmann.text = (0.71*ftpr(MxLIL) + 0.39*ftpr(MaxFirstPermMol_left_bachmann) + 0.86*ftpr(MndLIL) + 6.96).ToString();
+	}
+	
+	
 		
 }
