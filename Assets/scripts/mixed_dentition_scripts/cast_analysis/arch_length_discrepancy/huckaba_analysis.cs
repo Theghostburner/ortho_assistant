@@ -290,6 +290,157 @@ int get_index(float[] arr, float ele, int len)
 		mandibularWidthBachmann.text = (0.71*ftpr(MxLIL) + 0.39*ftpr(MaxFirstPermMol_left_bachmann) + 0.86*ftpr(MndLIL) + 6.96).ToString();
 	}
 	
+	//bolton for archlenth huckaba
+	 public TMP_InputField BolMndFMR, BolMndFML,BolMxFMR,BolMxFML;
+	 private float BolOvrRat_H,BolAntRat_H;
+
+	 public TMP_Text bolOvrRatText_h,BolAntRatText_h,bolOvrRatInsightText_h,BolAntRatInsightText_h;
+
+	 public void calculateBolton_HuckabaBased()
+	 {
+		calculateHuckaba();
+		BolOvrRat_H = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + MndACaL + MndACaR + MndAPML1 + MndAPMR1 + MndAPML2 + MndAPMR2 + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + MxACaL + MxACaR + MxAPML1 + MxAPMR1 + MxAPML2 + MxAPMR2 + ftpr(BolMxFMR) + ftpr(BolMxFML));
+		BolAntRat_H = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + MndACaL + MndACaR) * 100 / (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + MxACaL + MxACaR);
+
+		bolOvrRatText_h.text = BolOvrRat_H.ToString();
+		BolAntRatText_h.text = BolAntRat_H.ToString();
+
+		if(BolOvrRat_H < 91.3f)
+		{
+			bolOvrRatInsightText_h.text = "The amount off maxillary tooth excess(Overall Ratio) considering Huckaba's results is "+ (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + MxACaL + MxACaR + MxAPML1 + MxAPMR1 + MxAPML2 + MxAPMR2 + ftpr(BolMxFMR) + ftpr(BolMxFML) - (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + MndACaL + MndACaR + MndAPML1 + MndAPMR1 + MndAPML2 + MndAPMR2 + ftpr(BolMndFMR) + ftpr(BolMndFML)) * (100f / 91.3f));
+		}
+		else if(BolOvrRat_H >= 91.3f)
+		{
+			bolOvrRatInsightText_h.text = "The amount of mandibular tooth excess(Overall Ratio) considering Huckabas results is "+(ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + MndACaL + MndACaR + MndAPML1 + MndAPMR1 + MndAPML2 + MndAPMR2 + ftpr(BolMndFMR) + ftpr(BolMndFML) - (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + MxACaL + MxACaR + MxAPML1 + MxAPMR1 + MxAPML2 + MxAPMR2 + ftpr(BolMxFMR) + ftpr(BolMxFML))*(91.3f / 100));
+		}
+		if(BolAntRat_H < 77.2f)
+		{
+			BolAntRatInsightText_h.text = "The amount of maxillary tooth excess(Anterior Ratio) considering Huckaba's results is "+( ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + MxACaL + MxACaR - (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + MndACaL + MndACaR) * (100 / 77.2f));
+			
+		}
+		else if(BolAntRat_H >= 77.2f)
+		{
+			BolAntRatInsightText_h.text = "The amount of mandibular tooth excess(Anterior Ratio) considering Huckaba's results is "+( ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + MndACaL + MndACaR - (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + MxACaL + MxACaR)*(77.2 / 100));
+		}
+	 }
+	
+	private float BolOvrRat_TJ;
+	public TMP_Text bolOvrRat_TJ_text,tanakaInferenceText;
+	 public void calculateBolton_tanakaBased()
+	 {
+		BolOvrRat_TJ = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5f) * 2) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11) * 2) + ftpr(BolMxFMR) + ftpr(BolMxFML));
+        bolOvrRat_TJ_text.text = BolOvrRat_TJ.ToString();
+
+		if (BolOvrRat_TJ < 91.3)
+		{
+			tanakaInferenceText.text = "The amount of maxillary tooth excess considering Tanaka and Johnston's results is "+ (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11) * 2) + ftpr(BolMxFMR) + ftpr(BolMxFML) - (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5) * 2) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / 91.3f);
+		} 
+		else 
+		{
+			tanakaInferenceText.text = "The amount of mandibular tooth excess considering Tanaka and Johnston's results is "+(ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5) * 2) + ftpr(BolMndFMR) + ftpr(BolMndFML) - (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11) * 2) + ftpr(BolMxFMR) + ftpr(BolMxFML))*91.3f / 100);
+		}
+						
+	 }
+
+	 private float BolOvrRat_M,BolOvrRat_F;
+
+	 public TMP_Text BolOvrRat_M_text,BolOvrRat_F_text,moyerBoltonInferenceMale,moyerBoltonInferenceFeMale;
+
+	 public void calculateBolton_moyerBased()
+	 {
+		BolOvrRat_M = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + (2*moyer_data(1, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + (2*moyer_data(3, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMxFMR) + ftpr(BolMxFML));
+		BolOvrRat_F = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + (2*moyer_data(2, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + (2*moyer_data(4, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMxFMR) + ftpr(BolMxFML));
+		BolOvrRat_F_text.text = BolOvrRat_F.ToString();
+		BolOvrRat_M_text.text = BolOvrRat_M.ToString();
+		
+		if (BolOvrRat_M < 91.3) 
+		{
+			float calcToprint = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + (2*moyer_data(3, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMxFMR) + ftpr(BolMxFML) - (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + (2*moyer_data(1, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / 91.3f);	
+			moyerBoltonInferenceMale.text =  "The amount of maxillary tooth excess considering Moyer's results is "+ calcToprint;
+		}	
+		else 
+		{
+			float calcToprint = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + (2*moyer_data(1, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMndFMR) + ftpr(BolMndFML) - (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + (2*moyer_data(3, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMxFMR) + ftpr(BolMxFML))*91.3f / 100);
+			moyerBoltonInferenceMale.text = "The amount of mandibular tooth excess considering Moyer's results is "+calcToprint;
+		}
+		if (BolOvrRat_F < 91.3) 
+		{
+			float calcToprint = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + (2*moyer_data(4, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMxFMR) + ftpr(BolMxFML) - (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + (2*moyer_data(1, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / 91.3f);	
+			moyerBoltonInferenceFeMale.text =  "The amount of maxillary tooth excess considering Moyer's results is "+ calcToprint;
+		}	
+		else 
+		{
+			float calcToprint = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + (2*moyer_data(2, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMndFMR) + ftpr(BolMndFML) - (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + (2*moyer_data(3, ftpr(MndCIR), ftpr(MndCIL), ftpr(MndLIR), ftpr(MndLIL), ftpr(p))) + ftpr(BolMxFMR) + ftpr(BolMxFML))*91.3f / 100);
+			moyerBoltonInferenceFeMale.text = "The amount of mandibular tooth excess considering Moyer's results is "+calcToprint;
+		}
+
+	 }
+
+	 public TMP_InputField MndIL,MxIL;
+	 private float Mnd_IL_SR,Mx_IL_SR ;
+	 public TMP_Text incisalmaxillaText,IncisalMandibleText;
+
+	 public void incisalLiability()
+	 {
+		Mnd_IL_SR = ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIR) + ftpr(MndLIL);
+		Mx_IL_SR = ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIR) + ftpr(MxLIL);
+		incisalmaxillaText.text = (ftpr(MxIL) - Mx_IL_SR).ToString();
+		IncisalMandibleText.text = (ftpr(MndIL) - Mnd_IL_SR).ToString();
+
+	 }
+
+	 public TMP_InputField MndLSR,MndLSL,MxLSR,MxLSL;
+
+	 private float Mnd_LS_SR_R_H,Mnd_LS_SR_L_H,Mx_LS_SR_R_H,Mx_LS_SR_L_H,Mnd_LS_SR_R_TJ,Mnd_LS_SR_L_TJ,Mx_LS_SR_R_TJ,Mx_LS_SR_L_TJ,Mnd_LS_SR_R_M,Mnd_LS_SR_L_M,Mx_LS_SR_R_M,Mx_LS_SR_L_M;
+	 public TMP_Text H_mnR,H_mnL,H_mxR,H_mxL,Tnj_mnR,Tnj_mnL,Tnj_mxR,Tnj_mxL,M_mnR,M_mnL,M_mxR,M_mxL;
+	 public void leewaySpaceofNance()
+	 {
+		//Huckaba
+		
+		Mnd_LS_SR_R_H = MndACaR + MndAPMR1 + MndAPMR2;
+		Mnd_LS_SR_L_H = MndACaL + MndAPML1 + MndAPML2;
+		Mx_LS_SR_R_H = MxACaR + MxAPMR1 + MxAPMR2;
+		Mx_LS_SR_L_H = MxACaL + MxAPML1 + MxAPML2;
+
+		H_mnR.text =  (ftpr(MndLSR) - Mnd_LS_SR_R_H).ToString();
+		H_mnL.text =  (ftpr(MndLSL) - Mnd_LS_SR_L_H).ToString();
+		H_mxR.text =  (ftpr(MxLSR) - Mx_LS_SR_R_H).ToString();
+		H_mxL.text =  (ftpr(MxLSL) - Mx_LS_SR_L_H).ToString();
+	
+
+	 //Tanaka and Johnston
+
+		Mnd_LS_SR_R_TJ = ((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5f;
+		Mnd_LS_SR_L_TJ = ((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5f;
+		Mx_LS_SR_R_TJ = ((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11;
+		Mx_LS_SR_L_TJ = ((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11;
+
+		Tnj_mnR.text = (ftpr(MndLSR) - Mnd_LS_SR_R_TJ).ToString();
+		Tnj_mnL.text =  (ftpr(MndLSL) - Mnd_LS_SR_L_TJ).ToString();
+		Tnj_mxR.text =  (ftpr(MxLSR) - Mx_LS_SR_R_TJ).ToString();
+		Tnj_mxL.text =  (ftpr(MxLSL) - Mx_LS_SR_L_TJ).ToString();
+	
+
+	 //Moyer
+
+		Mnd_LS_SR_R_M = moyer_width_mnd;
+		Mnd_LS_SR_L_M = moyer_width_mnd;
+		Mx_LS_SR_R_M = moyer_width_mx;
+		Mx_LS_SR_L_M = moyer_width_mx;
+
+		M_mnR.text =  (ftpr(MndLSR) - Mnd_LS_SR_R_M).ToString();
+		M_mnL.text =  (ftpr(MndLSL) - Mnd_LS_SR_L_M).ToString();
+		M_mxR.text =  (ftpr(MxLSR) - Mx_LS_SR_R_M).ToString();
+		M_mxL.text =  (ftpr(MxLSL) - Mx_LS_SR_L_M).ToString();
+
+
+
+
+
+
+		
+	 }
+
 	
 		
 }
