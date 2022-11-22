@@ -434,12 +434,26 @@ int get_index(float[] arr, float ele, int len)
 		M_mxL.text =  (ftpr(MxLSL) - Mx_LS_SR_L_M).ToString();
 
 
-
-
-
-
-		
 	 }
+
+	 public TMP_InputField D;
+	 float D_local,Total_discrepancy_Tweed_H, Total_discrepancy_Tweed_TJ, MndSRH, MndSRTJ;
+	 public TMP_Text huckabaTweed,tanakaTweed;
+
+	 public void calculateTweed()
+	 {
+		D_local = ftpr(D)*2;
+
+		MndSRH = -1 * (MndACaR + MndACaL + MndAPMR1 + MndAPML1 + MndAPMR2 + MndAPML2) - (ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) - (ftpr(CBR) + ftpr(CBL));
+		MndSRTJ = (((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5f)*(-2) - (ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) - (ftpr(CBR) + ftpr(CBL));
+
+		Total_discrepancy_Tweed_H = ftpr(Mndd) + MndSRH - ftpr(D);
+		Total_discrepancy_Tweed_TJ = ftpr(Mndd) + MndSRTJ - ftpr(D);
+
+		huckabaTweed.text = (Mathf.Round(Total_discrepancy_Tweed_H * 100) / 100).ToString();
+		tanakaTweed.text = (Mathf.Round(Total_discrepancy_Tweed_TJ * 100) / 100).ToString();
+	 }
+	
 
 	
 		

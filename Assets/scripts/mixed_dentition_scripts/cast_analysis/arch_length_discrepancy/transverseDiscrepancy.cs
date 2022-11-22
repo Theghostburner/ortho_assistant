@@ -135,8 +135,8 @@ public class transverseDiscrepancy : MonoBehaviour
         preMax.text = SchwMxCPV.ToString();
         moMax.text = SchwMxCMV.ToString();
         moMan.text= SchwMndCMV.ToString();
-        totPreMan.text = (SchwMndCPV - ftpr(MndMPV)).ToString();
-        totPreMax.text = (SchwMxCPV - ftpr(MxMPV)).ToString();
+        totPreMan.text = (SchwMndCPV - MndMPV_local).ToString();
+        totPreMax.text = (SchwMxCPV - MxMPV_local).ToString();
         totMoMax.text = (SchwMxCMV - ftpr(MxMMV)).ToString();
         totMoMan.text = (SchwMndCMV - ftpr(MndMMV)).ToString();
 
