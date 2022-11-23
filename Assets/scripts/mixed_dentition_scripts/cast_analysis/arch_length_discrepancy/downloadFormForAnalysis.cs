@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class downloadFormForAnalysis : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  public void downloadFormRedirection()
+  {
+    Application.OpenURL("https://drive.google.com/drive/folders/1IYD1bszMPYJ2VneP1w_qSnn_ufGm_9V4?usp=sharing");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  }
+  public void exitApp()
+  {
+    Application.Quit();
+  }
 }
