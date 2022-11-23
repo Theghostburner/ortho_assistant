@@ -453,6 +453,47 @@ int get_index(float[] arr, float ele, int len)
 		huckabaTweed.text = (Mathf.Round(Total_discrepancy_Tweed_H * 100) / 100).ToString();
 		tanakaTweed.text = (Mathf.Round(Total_discrepancy_Tweed_TJ * 100) / 100).ToString();
 	 }
+
+	 public TMP_InputField FMIAa,FMIAo,up_lip_t,ch_t,ant_sp,coocR,coocL,mid_spR,mid_spL,FMR,FML,MPFMR,MPFML,PSMR,PSML,PTMR,PTML,pos_spR,pos_spL,g,pat_age;
+   float PMR,PML,APTMR,APTML,arch_inc,cep_corr,wLA,ant_tsp_sr,tot_def_ant,Curve_o_Occ,mid_tsp_sr,tot_def_mid,APSMR,APSML,pos_tsp_sr,tot_def_pos;
+   public TMP_Text anterior,middle,posterior,sumAMP;
+   public void calculateTotalSpace()
+   {
+        PMR = ftpr(FMR) / ftpr(MPFMR);
+		PML = ftpr(FML) / ftpr(MPFML);
+		APTMR = PMR * ftpr(PTMR);
+		APTML = PML * ftpr(PTML);
+
+    if (g.text == "1") 
+    {
+        arch_inc = (16 - ftpr(pat_age)) * 3;
+
+    }
+    else
+    {
+        arch_inc = (14 - ftpr(pat_age)) * 3;
+
+    }
+
+	cep_corr = (ftpr(FMIAo) - ftpr(FMIAa))*0.8f;
+	wLA = MndACaL + MndACaR + ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR);
+	ant_tsp_sr = cep_corr + wLA + ((ftpr(up_lip_t) - ftpr(ch_t)) * 2);
+	tot_def_ant = ftpr(ant_sp) - ant_tsp_sr;
+	Curve_o_Occ = ((ftpr(coocL) + ftpr(coocR)) / 2) + 0.5f;
+	mid_tsp_sr = MndAPML1 + MndAPML2 + MndAPMR1 + MndAPMR2 + ftpr(FMR) + ftpr(FML) + Curve_o_Occ;
+	tot_def_mid = ftpr(mid_spR) + ftpr(mid_spL) - mid_tsp_sr;
+
+	APSMR = PMR * ftpr(PSMR);
+	APSML = PML * ftpr(PSML);
+	pos_tsp_sr = APTML + APTMR + APSMR + APSML;
+	tot_def_pos = arch_inc + ftpr(pos_spL) + ftpr(pos_spR) - pos_tsp_sr;
+
+	//results
+	anterior.text = tot_def_ant.ToString();
+	middle.text = tot_def_mid.ToString();
+	posterior.text = (Mathf.Round(tot_def_pos * 100) / 100).ToString();
+	sumAMP.text = (Mathf.Round((tot_def_ant + tot_def_mid + tot_def_pos) * 100) / 100).ToString();
+   }
 	
 
 	
