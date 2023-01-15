@@ -83,6 +83,9 @@ public class huckaba_analysis : MonoBehaviour
 	public TMP_Text manBiCu,maxBiCu,totDisMax,totDisMan;
 	public void calculateTanaka()
 	{
+		Mndb = -1 * (ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL));
+		Mxb = -1 * (ftpr(MxCIR) + ftpr(MxCIL) + ftpr(MxLIR) + ftpr(MxLIL));
+		c = -1 * (ftpr(CBR) + ftpr(CBL));
 		Sum_of_four_Mnd_Incisors = ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL);
 
 		MxaTJ = (((Sum_of_four_Mnd_Incisors) / 2) + 11)*(-2);
@@ -95,8 +98,8 @@ public class huckaba_analysis : MonoBehaviour
 
 		manBiCu.text = ((Sum_of_four_Mnd_Incisors / 2) + 10.5).ToString();
 		maxBiCu.text = ((Sum_of_four_Mnd_Incisors / 2) + 11).ToString();
-		totDisMan.text = ((Mathf.Round(MxTotal_discrepancy_TJ * 100) / 100)).ToString();
-		totDisMax.text = ((Mathf.Round(MndTotal_discrepancy_TJ * 100) / 100)).ToString();
+		totDisMan.text = ((Mathf.Round(MndTotal_discrepancy_TJ * 100) / 100)).ToString();
+		totDisMax.text = ((Mathf.Round(MxTotal_discrepancy_TJ * 100) / 100)).ToString();
 
 	}
 	public TMP_Text lucknowMaleMax,lucknowMaleMan,lucknowFemaleMax,lucknowFemaleMan,patnaMaleMax,patnaMaleMan,patnaFemaleMax,patnaFemaleMan;
@@ -333,11 +336,11 @@ int get_index(float[] arr, float ele, int len)
 
 		if (BolOvrRat_TJ < 91.3)
 		{
-			tanakaInferenceText.text = "The amount of maxillary tooth excess considering Tanaka and Johnston's results is "+ (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11) * 2) + ftpr(BolMxFMR) + ftpr(BolMxFML) - (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5) * 2) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / 91.3f);
+			tanakaInferenceText.text = "The amount of maxillary tooth excess \n"+ (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11) * 2) + ftpr(BolMxFMR) + ftpr(BolMxFML) - (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5) * 2) + ftpr(BolMndFMR) + ftpr(BolMndFML)) * 100 / 91.3f);
 		} 
 		else 
 		{
-			tanakaInferenceText.text = "The amount of mandibular tooth excess considering Tanaka and Johnston's results is "+(ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5) * 2) + ftpr(BolMndFMR) + ftpr(BolMndFML) - (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11) * 2) + ftpr(BolMxFMR) + ftpr(BolMxFML))*91.3f / 100);
+			tanakaInferenceText.text = "The amount of mandibular tooth excess \n"+(ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 10.5) * 2) + ftpr(BolMndFMR) + ftpr(BolMndFML) - (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR) + ((((ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndLIR) + ftpr(MndLIL)) / 2) + 11) * 2) + ftpr(BolMxFMR) + ftpr(BolMxFML))*91.3f / 100);
 		}
 						
 	 }
@@ -376,16 +379,18 @@ int get_index(float[] arr, float ele, int len)
 
 	 }
 
-	 public TMP_InputField MndIL,MxIL;
-	 private float Mnd_IL_SR,Mx_IL_SR ;
+	 public TMP_InputField MndRightIL,MndLeftIL,MxRtightIL,MxLeftIL;
+	 private float Mnd_IL_SR,Mx_IL_SR,MndIL,MxIL ;
 	 public TMP_Text incisalmaxillaText,IncisalMandibleText;
 
 	 public void incisalLiability()
 	 {
 		Mnd_IL_SR = ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIR) + ftpr(MndLIL);
 		Mx_IL_SR = ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIR) + ftpr(MxLIL);
-		incisalmaxillaText.text = (ftpr(MxIL) - Mx_IL_SR).ToString();
-		IncisalMandibleText.text = (ftpr(MndIL) - Mnd_IL_SR).ToString();
+		MxIL = ftpr(MxRtightIL) + ftpr(MxLeftIL);
+		MndIL = ftpr(MndRightIL)+ftpr(MndLeftIL);
+		incisalmaxillaText.text = (MxIL - Mx_IL_SR).ToString();
+		IncisalMandibleText.text = (MndIL - Mnd_IL_SR).ToString();
 
 	 }
 
