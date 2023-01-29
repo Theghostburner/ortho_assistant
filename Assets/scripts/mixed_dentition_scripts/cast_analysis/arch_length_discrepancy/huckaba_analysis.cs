@@ -106,10 +106,10 @@ public class huckaba_analysis : MonoBehaviour
 
 	public void calculateRegionalLucknow()
 	{
-		lucknowMaleMax.text = (14.439 + Sum_of_four_Mnd_Incisors - (2*0.336)).ToString();
-		lucknowMaleMan.text = (14.576 + Sum_of_four_Mnd_Incisors - (2*0.315)).ToString();
-		lucknowFemaleMan.text = (13.189 + Sum_of_four_Mnd_Incisors - (2*0.344)).ToString();
-		lucknowFemaleMax.text = (13.288 + Sum_of_four_Mnd_Incisors - (2*0.368)).ToString();
+		lucknowMaleMax.text = (14.439 + Sum_of_four_Mnd_Incisors*0.336).ToString();
+		lucknowMaleMan.text = (14.576 + Sum_of_four_Mnd_Incisors*0.315).ToString();
+		lucknowFemaleMan.text = (13.189 + Sum_of_four_Mnd_Incisors*0.344).ToString();
+		lucknowFemaleMax.text = (13.288 + Sum_of_four_Mnd_Incisors*0.368).ToString();
 
 	}
 	public void calculateRegionalPatna()

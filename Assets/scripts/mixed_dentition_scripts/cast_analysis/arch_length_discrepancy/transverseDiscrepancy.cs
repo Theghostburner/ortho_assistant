@@ -7,7 +7,7 @@ using TMPro;
 public class transverseDiscrepancy : MonoBehaviour
 {
 
-	public TMP_InputField  MxCIR,MxCIL,MndCIR,MndCIL,MxLIR,MxLIL,MndLIR,MndLIL,MxMPV,MndMPV,MxMMV,MndMMV;
+	public TMP_InputField  MxCIR,MxCIL,MndCIR,MndCIL,MxLIR,MxLIL,MndLIR,MndLIL,MxMPV_ponts,MndMPV_ponts,MxMMV_ponts,MndMMV_ponts,MxMPV_schwarz,MndMPV_schwarz,MxMMV_schwarz,MndMMV_schwarz;
 
     
 
@@ -31,12 +31,12 @@ public class transverseDiscrepancy : MonoBehaviour
         premolarValMan.text =  PontMndCPV.ToString();
         molaValMax.text = PontMxCMV.ToString();
         molarValMan.text = PontMndCMV.ToString();
-        totDisPreMax.text = (PontMxCPV - ftpr(MxMPV)).ToString();
-        totDispreMan.text = (PontMndCPV - ftpr(MndMPV)).ToString();
-        totDisMoMax.text = (PontMxCMV - ftpr(MxMMV)).ToString();
-        totDisMoMan.text = (PontMndCMV - ftpr(MndMMV)).ToString();
+        totDisPreMax.text = (ftpr(MxMPV_ponts) - PontMxCPV).ToString();
+        totDispreMan.text = (ftpr(MndMPV_ponts) - PontMndCPV).ToString();
+        totDisMoMax.text = (ftpr(MxMMV_ponts) - PontMxCMV).ToString();
+        totDisMoMan.text = (ftpr(MndMMV_ponts) - PontMndCMV).ToString();
 
-        if(ftpr(MxMPV) < PontMxCPV) 
+        if(ftpr(MxMPV_ponts) < PontMxCPV) 
         {
             infPreMax.text = "measured premolar value is less than calculated value, therefore its a narrow arch and needs expansion.";
         }
@@ -44,21 +44,21 @@ public class transverseDiscrepancy : MonoBehaviour
             infPreMax.text = "measured premolar value is more than calculated value, therefore its a wide arch and doesn't need expansion.";
         }
 
-		if(ftpr(MxMMV) < PontMxCMV){
+		if(ftpr(MxMMV_ponts) < PontMxCMV){
             infMoMax.text = "measured molar value is less than calculated value, therefore its a narrow arch and needs expansion.";
         }
         else{
             infMoMax.text = "measured molar value is more than calculated value, therefore its a wide arch and doesn't need expansion.";
         }
 
-        if(ftpr(MndMPV) < PontMndCPV){
+        if(ftpr(MndMPV_ponts) < PontMndCPV){
             infPreMan.text = "measured premolar value is less than calculated value, therefore its a narrow arch and needs expansion.";
         }
         else{
             infPreMan.text = "measured premolar value is more than calculated value, therefore its a wide arch and doesn't need expansion.";
         }
 
-		if(ftpr(MndMMV) < PontMndCMV){
+		if(ftpr(MndMMV_ponts) < PontMndCMV){
             infMoMan.text = "measured molar value is less than calculated value, therefore its a narrow arch and needs expansion.";
         } 
         else{
@@ -77,14 +77,14 @@ public class transverseDiscrepancy : MonoBehaviour
         float MxMPV_local,MndMPV_local;
         if (mfpe.text == 2.ToString())
 		{
-            MxMPV_local = float.Parse(MxMPV.text+2.ToString());
-            MndMPV_local = float.Parse(MndMPV.text+2.ToString());
+            MxMPV_local = float.Parse(MxMPV_schwarz.text)+2;
+            MndMPV_local = float.Parse(MndMPV_schwarz.text)+2;
 
         }
         else
         {
-            MxMPV_local = ftpr(MxMPV);
-            MndMPV_local = ftpr(MndMPV);
+            MxMPV_local = ftpr(MxMPV_schwarz);
+            MndMPV_local = ftpr(MndMPV_schwarz);
         }
 
         if (facetype.text == 1.ToString())
@@ -118,16 +118,16 @@ public class transverseDiscrepancy : MonoBehaviour
 				SchwMxCPV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxCIL) + ftpr(MxCIR) - 4) + v1;
 				SchwMxCMV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxCIL) + ftpr(MxCIR) - 4) + v2;
 
-				SchwMndCPV = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndCIR) - 4) + v1;
-				SchwMndCMV = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndCIL) + ftpr(MndCIR) - 4) + v2;
+				SchwMndCPV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxCIL) + ftpr(MxCIR) - 4) + v1;
+				SchwMndCMV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxCIL) + ftpr(MxCIR) - 4) + v2;
 			}
 			else
 			{
 				SchwMxCPV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR)) + v1;
 				SchwMxCMV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR)) + v2;
 
-				SchwMndCPV = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR)) + v1;
-				SchwMndCMV = (ftpr(MndCIL) + ftpr(MndCIR) + ftpr(MndLIL) + ftpr(MndLIR)) + v2;
+				SchwMndCPV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR)) + v1;
+				SchwMndCMV = (ftpr(MxCIL) + ftpr(MxCIR) + ftpr(MxLIL) + ftpr(MxLIR)) + v2;
 			}
 		}
 
@@ -137,8 +137,8 @@ public class transverseDiscrepancy : MonoBehaviour
         moMan.text= SchwMndCMV.ToString();
         totPreMan.text = (SchwMndCPV - MndMPV_local).ToString();
         totPreMax.text = (SchwMxCPV - MxMPV_local).ToString();
-        totMoMax.text = (SchwMxCMV - ftpr(MxMMV)).ToString();
-        totMoMan.text = (SchwMndCMV - ftpr(MndMMV)).ToString();
+        totMoMax.text = (SchwMxCMV - ftpr(MxMMV_schwarz)).ToString();
+        totMoMan.text = (SchwMndCMV - ftpr(MndMMV_schwarz)).ToString();
 
     }
 
