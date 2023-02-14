@@ -12,7 +12,10 @@ public class inputFieldValueUnifier_script : MonoBehaviour
         AllInputFields = GetComponentsInChildren<TMP_InputField>(true);
         foreach(var i in AllInputFields)
         {
-            i.text = "0";
+            i.text = "";
+            TMP_Text placeholder_text = i.placeholder.gameObject.GetComponent<TMP_Text>();
+            placeholder_text.alignment  = TextAlignmentOptions.Center;
+            placeholder_text.text = "Enter Value";
             i.contentType = TMP_InputField.ContentType.DecimalNumber;
         }
 
