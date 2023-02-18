@@ -106,6 +106,7 @@ public class huckaba_analysis : MonoBehaviour
 
 	public void calculateRegionalLucknow()
 	{
+		calculateTanaka();
 		lucknowMaleMax.text = (14.439 + Sum_of_four_Mnd_Incisors*0.336).ToString();
 		lucknowMaleMan.text = (14.576 + Sum_of_four_Mnd_Incisors*0.315).ToString();
 		lucknowFemaleMan.text = (13.189 + Sum_of_four_Mnd_Incisors*0.344).ToString();
@@ -114,6 +115,7 @@ public class huckaba_analysis : MonoBehaviour
 	}
 	public void calculateRegionalPatna()
 	{
+		calculateTanaka();
 		patnaMaleMan.text = (10.658 + 0.467*Sum_of_four_Mnd_Incisors).ToString();
 		patnaMaleMax.text = (10.805 + 0.474*Sum_of_four_Mnd_Incisors).ToString();
 		patnaFemaleMan.text = (12.750 + 0.348*Sum_of_four_Mnd_Incisors).ToString();
@@ -244,6 +246,7 @@ int get_index(float[] arr, float ele, int len)
 
 	public void calculateRegionalMoyerBhopal()
 	{
+		calculateMoyerFemale();
 		bhopalMaleMax.text = (17.272 + 0.183*Sum_of_four_Mnd_Incisors).ToString();
 		bhopalMaleMan.text = (13.914 + 0.297*Sum_of_four_Mnd_Incisors).ToString();
 		bhopalFemaleMax.text = (17.151 + 0.173*Sum_of_four_Mnd_Incisors).ToString();
